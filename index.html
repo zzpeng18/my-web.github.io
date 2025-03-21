@@ -1,54 +1,419 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<style type="text/css">
-			#wrap{
-				width: 20px;height: 40px;
-				border:1px solid red;
-				margin: 0 auto;
-				position: relative;
-			}
-			.box1{
-				width: 20px;height: 20px;
-				background-color: red;
-				border-radius: 50%;
-				position: absolute;
-				top: 0;
-				animation-name: one;
-				animation-duration: 4s;
-				animation-iteration-count: infinite;
-			}
-			.box2{
-				width: 20px;height: 20px;
-				background-color: green;
-				border-radius: 50%;
-				position: absolute;
-				top: 20px;
-				animation-name: two;
-				animation-duration: 4s;
-				animation-iteration-count: infinite;
-			}
-			@keyframes one{
-				0%{top: 0;z-index: 1;}
-				50%{top: 20px;}
-				51%{top: 20px;}
-				100%{top: 0px;}
-			}
-			@keyframes two{
-				0%{top: 20px;}
-				50%{top: 0px;}
-				51%{top: 0px;}
-				100%{top: 20px;z-index: 0;}
-			}
-		</style>
-	</head>
-	<body>
-		<div id="wrap">
-			<div class="box1"></div>
-			<div class="box2"></div>
-		</div>
-	</body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Profile - WeiTingting</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff; /* 霓虹蓝 */
+            --cyber-purple: #bc13fe; /* 霓虹紫 */
+            --matrix-green: #0f0; /* 矩阵绿 */
+            --dark-bg: #0a0a16; /* 深色背景 */
+            --light-bg: rgba(255, 255, 255, 0.1); /* 浅色背景 */
+            --text-color: #fff; /* 文字颜色 */
+            --accent-color: #ff6f61; /* 强调色 */
+        }
+
+        /* 赛博朋克风格基础 */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(0,243,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(188,19,254,0.1) 0%, transparent 50%),
+                var(--dark-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+		.box{
+			width: 1520px;
+		}
+        /* 数据流背景效果 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(0deg, 
+                    transparent 24%, 
+                    rgba(0,243,255,0.05) 25%, 
+                    rgba(0,243,255,0.05) 26%, 
+                    transparent 27%),
+                linear-gradient(90deg, 
+                    transparent 24%, 
+                    rgba(188,19,254,0.05) 25%, 
+                    rgba(188,19,254,0.05) 26%, 
+                    transparent 27%);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+		
+        /* 顶部导航栏 */
+        .cyber-nav {
+            padding: 1.5rem;
+            background: rgba(10,10,30,0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--neon-blue);
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--neon-blue);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        /* 左侧固定导航栏 */
+        .cyber-sidebar {
+			text-align: center;
+            width: 250px;
+            height: 1100px;
+            background: rgba(10, 10, 30, 0.95); /* 深色半透明背景 */
+            backdrop-filter: blur(15px);
+            border-right: 2px solid var(--neon-blue);
+            padding: 2rem;
+			float: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 圆形头像 */
+        .avatar-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-blue);
+            padding: 5px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: url(img/Cache_-6b9f4cf499e1f755.jpg) center/cover; /* 替换为你的头像地址 */
+            filter: grayscale(0.3) contrast(1.2);
+            transition: 0.5s;
+        }
+
+        .avatar-container:hover .avatar-img {
+            transform: scale(1.1);
+            filter: grayscale(0) contrast(1);
+        }
+
+        /* 侧边导航菜单 */
+        .side-nav {
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .nav-item {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid transparent;
+            transition: 0.3s;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        .nav-item::before {
+            content: ">";
+            position: absolute;
+            left: -15px;
+            color: var(--neon-blue);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover {
+            border-left-color: var(--neon-blue);
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .nav-item:hover::before {
+            opacity: 1;
+            left: -10px;
+        }
+
+        /* 主内容区域 */
+        .cyber-container {
+			float: right;
+			width: 1197px;
+            background: var(--dark-bg);
+            color: var(--text-color);
+        }
+		/* 内容头部区域 */
+		
+		.cyber-header {
+		    text-align: center;
+		    margin-bottom: 4rem;
+		    position: relative;
+		}
+		
+		.cyber-header h1 {
+		    font-size: 4rem;
+		    margin: 0;
+		    text-shadow: 0 0 15px var(--neon-blue);
+		    position: relative;
+		    display: inline-block;
+		}
+		
+		.cyber-header h1::after {
+		    content: "";
+		    position: absolute;
+		    width: 100%;
+		    height: 3px;
+		    background: linear-gradient(90deg, 
+		        transparent, 
+		        var(--neon-blue),
+		        transparent);
+		    bottom: -10px;
+		    left: 0;
+		    animation: scanline 3s infinite linear;
+		}
+        /* 信息卡片 */
+        .cyber-card {
+            background: rgba(20,20,40,0.8);
+            border: 1px solid var(--neon-blue);
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0,243,255,0.2);
+        }
+
+        .cyber-card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                var(--neon-blue),
+                var(--cyber-purple),
+                var(--neon-blue));
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        .data-item {
+            padding: 1.5rem;
+            border: 1px solid rgba(0,243,255,0.3);
+            position: relative;
+        }
+
+        .data-item::before {
+            content: "▶";
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-blue);
+        }
+
+        /* 状态指示器 */
+        .status-indicator {
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--neon-blue);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+		/* 响应式设计：针对手机端 */
+		        @media (max-width: 768px) {
+		            /* 顶部导航栏 */
+		            .cyber-nav {
+		                padding: 1rem;
+		            }
+		
+		            .nav-links {
+		                align-items: center;
+		            }
+		
+		            .nav-links a {
+		                padding: 0.5rem;
+		                margin: 0.25rem 0;
+		            }
+		
+		            /* 左侧固定导航栏 */
+		            .cyber-sidebar {
+		                width: 100%;
+		                height: auto;
+		                float: none;
+		                display: flex;
+		                flex-direction: column;
+		                align-items: center;
+		                padding: 1rem;
+		            }
+		
+		            .avatar-container {
+		                margin-bottom: 1rem;
+		            }
+		
+		            .side-nav {
+		                display: none; /* 在手机端隐藏侧边导航 */
+		            }
+		
+		            /* 主内容区域 */
+		            .cyber-container {
+		                float: none;
+		                width: auto;
+		                padding: 1rem;
+		            }
+		
+		            .cyber-header h1 {
+		                font-size: 2rem;
+		            }
+		
+		            /* 时间线 */
+		            .timeline {
+		                display: flex;
+		                flex-direction: column;
+		                align-items: center;
+		            }
+		
+		            .timeline-item {
+		                margin: 0.5rem 0;
+		            }
+		        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="box">
+		<!-- 顶部导航栏 -->
+		<nav class="cyber-nav">
+		    <div class="nav-links">
+		        <a href="#">主页</a>
+		        <a href="#">项目</a>
+		        <a href="#">数据</a>
+		        <a href="#">联系</a>
+		        <a href="#">故事</a>
+		    </div>
+		</nav>
+    <!-- 左侧固定导航栏 -->
+    <aside class="cyber-sidebar">
+        <div class="avatar-container">
+            <div class="avatar-img"></div>
+        </div>
+        
+        <nav class="side-nav">
+            <div class="nav-item">主页</div>
+            <div class="nav-item">项目档案</div>
+            <div class="nav-item">数据核心</div>
+            <div class="nav-item">时空坐标</div>
+            <div class="nav-item">加密通信</div>
+        </nav>
+    </aside>
+
+    
+
+    <!-- 主内容区域 -->
+    <div class="cyber-container">
+        <header class="cyber-header">
+            <h1>LIFE IS A JOURNEY</h1>
+            <p style="color: var(--neon-blue);">「终有一日同风起，扶摇直上九万里！」</p>
+        </header>
+
+        <!-- 核心信息 -->
+        <div class="data-grid">
+            <div class="cyber-card">
+                <h2 style="color: var(--neon-blue);">基础信息</h2>
+                <div class="data-item">
+                    <h3>毕业院校</h3>
+                    <p>永州职业技术学院</p>
+                </div>
+                <div class="data-item">
+                    <h3>所在坐标</h3>
+                    <p>湖南 · 永州</p>
+                </div>
+                <div class="data-item">
+                    <h3>身份标识</h3>
+                    <p>X</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 时间线 -->
+        <div class="cyber-card">
+            <h2 style="color: var(--neon-blue);">时空轨迹</h2>
+            <div class="timeline">
+                <div class="timeline-item active" style="--date: '15.3.5';">项目里程碑</div>
+                <div class="timeline-item" style="--date: '23.8.12';">数据突破</div>
+                <div class="timeline-item" style="--date: '24.1.1';">未来节点</div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
