@@ -3,417 +3,693 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Profile - WeiTingting</title>
+    <title>个人简介</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --neon-blue: #00f3ff; /* 霓虹蓝 */
-            --cyber-purple: #bc13fe; /* 霓虹紫 */
-            --matrix-green: #0f0; /* 矩阵绿 */
-            --dark-bg: #0a0a16; /* 深色背景 */
-            --light-bg: rgba(255, 255, 255, 0.1); /* 浅色背景 */
-            --text-color: #fff; /* 文字颜色 */
-            --accent-color: #ff6f61; /* 强调色 */
+            --primary-color: #4a6fa5;
+            --secondary-color: #6b8cae;
+            --accent-color: #ff7e5f;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #333;
+            --text-light: #6c757d;
         }
-
-        /* 赛博朋克风格基础 */
-        body {
-            font-family: 'Orbitron', sans-serif;
+        
+        * {
             margin: 0;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(0,243,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 90% 90%, rgba(188,19,254,0.1) 0%, transparent 50%),
-                var(--dark-bg);
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
             color: var(--text-color);
-            min-height: 100vh;
+            background-color: var(--light-color);
             overflow-x: hidden;
-        }
-		.box{
-			width: 1520px;
-		}
-        /* 数据流背景效果 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(0deg, 
-                    transparent 24%, 
-                    rgba(0,243,255,0.05) 25%, 
-                    rgba(0,243,255,0.05) 26%, 
-                    transparent 27%),
-                linear-gradient(90deg, 
-                    transparent 24%, 
-                    rgba(188,19,254,0.05) 25%, 
-                    rgba(188,19,254,0.05) 26%, 
-                    transparent 27%);
-            background-size: 50px 50px;
-            z-index: -1;
-        }
-		
-        /* 顶部导航栏 */
-        .cyber-nav {
-            padding: 1.5rem;
-            background: rgba(10,10,30,0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--neon-blue);
-            position: sticky;
-            top: 0;
-            z-index: 9999;
-        }
-
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
             position: relative;
-            padding: 0.5rem 1rem;
-            transition: 0.3s;
         }
-
-        .nav-links a::before {
-            content: "";
+        
+        /* 樱花样式 */
+        .sakura {
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: var(--neon-blue);
-            transition: 0.3s;
+            top: -50px;
+            z-index: 100;
+            color: #ffb7c5;
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.8;
+            animation: falling linear infinite;
         }
-
-        .nav-links a:hover::before {
-            width: 100%;
-        }
-
-        /* 左侧固定导航栏 */
-        .cyber-sidebar {
-			text-align: center;
-            width: 250px;
-            height: 1100px;
-            background: rgba(10, 10, 30, 0.95); /* 深色半透明背景 */
-            backdrop-filter: blur(15px);
-            border-right: 2px solid var(--neon-blue);
-            padding: 2rem;
-			float: left;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* 圆形头像 */
-        .avatar-container {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid var(--neon-blue);
-            padding: 5px;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: url(img/Cache_-6b9f4cf499e1f755.jpg) center/cover; /* 替换为你的头像地址 */
-            filter: grayscale(0.3) contrast(1.2);
-            transition: 0.5s;
-        }
-
-        .avatar-container:hover .avatar-img {
-            transform: scale(1.1);
-            filter: grayscale(0) contrast(1);
-        }
-
-        /* 侧边导航菜单 */
-        .side-nav {
-            width: 100%;
-            margin-top: 2rem;
-        }
-
-        .nav-item {
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-left: 3px solid transparent;
-            transition: 0.3s;
-            position: relative;
-            color: var(--text-color);
-        }
-
-        .nav-item::before {
-            content: ">";
-            position: absolute;
-            left: -15px;
-            color: var(--neon-blue);
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .nav-item:hover {
-            border-left-color: var(--neon-blue);
-            background: rgba(0, 243, 255, 0.05);
-        }
-
-        .nav-item:hover::before {
-            opacity: 1;
-            left: -10px;
-        }
-
-        /* 主内容区域 */
-        .cyber-container {
-			float: right;
-			width: 1197px;
-            background: var(--dark-bg);
-            color: var(--text-color);
-        }
-		/* 内容头部区域 */
-		
-		.cyber-header {
-		    text-align: center;
-		    margin-bottom: 4rem;
-		    position: relative;
-		}
-		
-		.cyber-header h1 {
-		    font-size: 4rem;
-		    margin: 0;
-		    text-shadow: 0 0 15px var(--neon-blue);
-		    position: relative;
-		    display: inline-block;
-		}
-		
-		.cyber-header h1::after {
-		    content: "";
-		    position: absolute;
-		    width: 100%;
-		    height: 3px;
-		    background: linear-gradient(90deg, 
-		        transparent, 
-		        var(--neon-blue),
-		        transparent);
-		    bottom: -10px;
-		    left: 0;
-		    animation: scanline 3s infinite linear;
-		}
-        /* 信息卡片 */
-        .cyber-card {
-            background: rgba(20,20,40,0.8);
-            border: 1px solid var(--neon-blue);
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-            transition: 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        .cyber-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0,243,255,0.2);
-        }
-
-        .cyber-card::before {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                var(--neon-blue),
-                var(--cyber-purple),
-                var(--neon-blue));
-            z-index: -1;
-            animation: borderGlow 3s linear infinite;
-        }
-
-        .data-item {
-            padding: 1.5rem;
-            border: 1px solid rgba(0,243,255,0.3);
-            position: relative;
-        }
-
-        .data-item::before {
-            content: "▶";
-            position: absolute;
-            left: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--neon-blue);
-        }
-
-        /* 状态指示器 */
-        .status-indicator {
-            margin-top: auto;
-            text-align: center;
-        }
-
-        .pulse-dot {
-            width: 10px;
-            height: 10px;
-            background-color: var(--neon-blue);
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
+        
+        @keyframes falling {
             0% {
-                transform: scale(0.8);
-                opacity: 0.7;
+                transform: translate(0, -10px) rotate(0deg);
+            }
+            10% {
+                transform: translate(10px, 10vh) rotate(36deg);
+            }
+            20% {
+                transform: translate(20px, 20vh) rotate(72deg);
+            }
+            30% {
+                transform: translate(30px, 30vh) rotate(108deg);
+            }
+            40% {
+                transform: translate(40px, 40vh) rotate(144deg);
             }
             50% {
-                transform: scale(1.2);
-                opacity: 1;
+                transform: translate(50px, 50vh) rotate(180deg);
+            }
+            60% {
+                transform: translate(60px, 60vh) rotate(216deg);
+            }
+            70% {
+                transform: translate(70px, 70vh) rotate(252deg);
+            }
+            80% {
+                transform: translate(80px, 80vh) rotate(288deg);
+            }
+            90% {
+                transform: translate(90px, 90vh) rotate(324deg);
             }
             100% {
-                transform: scale(0.8);
-                opacity: 0.7;
+                transform: translate(100px, 100vh) rotate(360deg);
             }
         }
-
-        @keyframes scanline {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
-
-        @keyframes borderGlow {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-		/* 响应式设计：针对手机端 */
-		        @media (max-width: 768px) {
-		            /* 顶部导航栏 */
-		            .cyber-nav {
-		                padding: 1rem;
-		            }
-		
-		            .nav-links {
-		                align-items: center;
-		            }
-		
-		            .nav-links a {
-		                padding: 0.5rem;
-		                margin: 0.25rem 0;
-		            }
-		
-		            /* 左侧固定导航栏 */
-		            .cyber-sidebar {
-		                width: 100%;
-		                height: auto;
-		                float: none;
-		                display: flex;
-		                flex-direction: column;
-		                align-items: center;
-		                padding: 1rem;
-		            }
-		
-		            .avatar-container {
-		                margin-bottom: 1rem;
-		            }
-		
-		            .side-nav {
-		                display: none; /* 在手机端隐藏侧边导航 */
-		            }
-		
-		            /* 主内容区域 */
-		            .cyber-container {
-		                float: none;
-		                width: auto;
-		                padding: 1rem;
-		            }
-		
-		            .cyber-header h1 {
-		                font-size: 2rem;
-		            }
-		
-		            /* 时间线 */
-		            .timeline {
-		                display: flex;
-		                flex-direction: column;
-		                align-items: center;
-		            }
-		
-		            .timeline-item {
-		                margin: 0.5rem 0;
-		            }
-		        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.3;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* 主要内容 */
+        .main-content {
+            position: relative;
+            margin-top: -50px;
+            z-index: 10;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .skill {
+            background: var(--light-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            border: 1px solid rgba(74, 111, 165, 0.2);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 8px;
+            height: 100%;
+            width: 2px;
+            background: var(--light-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 25px;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: -23px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 2px solid white;
+        }
+        
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .timeline-title {
+            font-weight: 700;
+            margin: 5px 0;
+            font-size: 1.05rem;
+        }
+        
+        .timeline-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* 项目展示 */
+        .projects {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .project {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-image {
+            height: 150px;
+            background: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+        
+        .project-details {
+            padding: 15px;
+            background: white;
+        }
+        
+        .project-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        .project-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: var(--accent-color);
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .project-link i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        
+        /* 联系表单 */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* 页脚 */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 50px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .footer-text {
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+        
+        /* 响应式设计 - 平板及以上 */
+        @media (min-width: 768px) {
+            header {
+                padding: 80px 0 120px;
+            }
+            
+            .avatar {
+                width: 150px;
+                height: 150px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .card {
+                padding: 30px;
+                margin-bottom: 30px;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .skill {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+            
+            .projects {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .project-image {
+                height: 180px;
+                font-size: 3rem;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 2;
+            }
+            
+            input, textarea {
+                padding: 12px 15px;
+            }
+        }
+        
+        /* 响应式设计 - 桌面 */
+        @media (min-width: 992px) {
+            .projects {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-	<div id="box">
-		<!-- 顶部导航栏 -->
-		<nav class="cyber-nav">
-		    <div class="nav-links">
-		        <a href="#">主页</a>
-		        <a href="#">项目</a>
-		        <a href="#">数据</a>
-		        <a href="#">联系</a>
-		        <a href="#">故事</a>
-		    </div>
-		</nav>
-    <!-- 左侧固定导航栏 -->
-    <aside class="cyber-sidebar">
-        <div class="avatar-container">
-            <div class="avatar-img"></div>
-        </div>
-        
-        <nav class="side-nav">
-            <div class="nav-item">主页</div>
-            <div class="nav-item">项目档案</div>
-            <div class="nav-item">数据核心</div>
-            <div class="nav-item">时空坐标</div>
-            <div class="nav-item">加密通信</div>
-        </nav>
-    </aside>
-
+    <!-- 樱花元素将通过JavaScript动态添加 -->
     
-
-    <!-- 主内容区域 -->
-    <div class="cyber-container">
-        <header class="cyber-header">
-            <h1>LIFE IS A JOURNEY</h1>
-            <p style="color: var(--neon-blue);">「终有一日同风起，扶摇直上九万里！」</p>
-        </header>
-
-        <!-- 核心信息 -->
-        <div class="data-grid">
-            <div class="cyber-card">
-                <h2 style="color: var(--neon-blue);">基础信息</h2>
-                <div class="data-item">
-                    <h3>毕业院校</h3>
-                    <p>永州职业技术学院</p>
-                </div>
-                <div class="data-item">
-                    <h3>所在坐标</h3>
-                    <p>湖南 · 永州</p>
-                </div>
-                <div class="data-item">
-                    <h3>身份标识</h3>
-                    <p>X</p>
-                </div>
+    <header>
+        <div class="container">
+            <img src="img/Cache_-6b9f4cf499e1f755.jpg" alt="头像" class="avatar fade-in">
+            <h1 class="fade-in delay-1"></h1>
+            <p class="tagline fade-in delay-1">技术爱好者</p>
+            <div class="social-links fade-in delay-2">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-
-        <!-- 时间线 -->
-        <div class="cyber-card">
-            <h2 style="color: var(--neon-blue);">时空轨迹</h2>
-            <div class="timeline">
-                <div class="timeline-item active" style="--date: '15.3.5';">项目里程碑</div>
-                <div class="timeline-item" style="--date: '23.8.12';">数据突破</div>
-                <div class="timeline-item" style="--date: '24.1.1';">未来节点</div>
+    </header>
+    
+    <div class="container main-content">
+        <div class="grid">
+            <!-- 关于我 -->
+            <div class="card fade-in delay-2">
+                <h2>关于我</h2>
+                <p>你好！</p>
+				
+                <div class="skills">
+                    <span class="skill">HTML5</span>
+                    <span class="skill">CSS3</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">React</span>
+                    <span class="skill">Vue.js</span>
+                    <span class="skill">Node.js</span>
+                    <span class="skill">UI设计</span>
+                    <span class="skill">响应式设计</span>
+                </div>
             </div>
+            
+            <!-- 经历 -->
+            <div class="card fade-in delay-3">
+                <h2>工作经历</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2021 - 至今</div>
+                        <h3 class="timeline-title"></h3>
+                        <p class="timeline-description"></p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2019 - 2021</div>
+                        <h3 class="timeline-title"></h3>
+                        <p class="timeline-description"></p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2018 - 2019</div>
+                        <h3 class="timeline-title"></h3>
+                        <p class="timeline-description"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 教育背景 -->
+            <div class="card fade-in delay-3">
+                <h2>教育背景</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2021 - 2024</div>
+                        <h3 class="timeline-title">计算机网络技术 - 永州职业技术学院</h3>
+                        <p class="timeline-description"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 项目展示 -->
+            <div class="card fade-in delay-4">
+                <h2>精选项目</h2>
+                <div class="projects">
+                    <div class="project">
+                        <div class="project-image">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title"></h3>
+                            <p class="project-description"></p>
+                            <!-- <a href="#" class="project-link">查看详情 <i class="fas fa-arrow-right"></i></a> -->
+                        </div>
+                    </div>
+                    
+                    <div class="project">
+                        <div class="project-image">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title"></h3>
+                            <p class="project-description"></p>
+                            <!-- <a href="#" class="project-link">查看详情 <i class="fas fa-arrow-right"></i></a> -->
+                        </div>
+                    </div>
+                    
+                    <div class="project">
+                        <div class="project-image">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title"></h3>
+                            <p class="project-description"></p>
+                            <!-- <a href="#" class="project-link">查看详情 <i class="fas fa-arrow-right"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
         </div>
     </div>
+    
+    <footer>
+        <div class="container">
+            <p class="footer-text"> 个人简介. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 创建樱花飘落效果
+        function createSakura() {
+            const sakura = document.createElement('div');
+            sakura.classList.add('sakura');
+            
+            // 随机选择樱花样式
+            const sakuraStyles = ['🌸', '🌸', '🌸', '🌸', '🌸'];
+            const randomStyle = sakuraStyles[Math.floor(Math.random() * sakuraStyles.length)];
+            
+            sakura.innerHTML = randomStyle;
+            
+            // 随机大小
+            const size = Math.random() * 15 + 8;
+            sakura.style.fontSize = `${size}px`;
+            
+            // 随机位置
+            sakura.style.left = Math.random() * window.innerWidth + 'px';
+            
+            // 随机动画持续时间
+            const duration = Math.random() * 10 + 5;
+            sakura.style.animationDuration = `${duration}s`;
+            
+            // 随机延迟
+            sakura.style.animationDelay = Math.random() * 5 + 's';
+            
+            document.body.appendChild(sakura);
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+                sakura.remove();
+            }, duration * 1000);
+        }
+        
+        // 根据屏幕尺寸调整樱花密度
+        function getSakuraInterval() {
+            if (window.innerWidth < 768) {
+                return 500; // 手机端减少樱花密度
+            }
+            return 300; // 桌面端正常密度
+        }
+        
+        // 每隔一段时间创建新的樱花
+        function startSakuraFall() {
+            setInterval(createSakura, getSakuraInterval());
+        }
+        
+        // 页面加载后开始樱花飘落
+        window.addEventListener('load', () => {
+            startSakuraFall();
+        });
+        
+        // 窗口大小改变时调整樱花密度
+        window.addEventListener('resize', () => {
+            // 这里需要重新设置interval，实际项目中可能需要更复杂的处理
+            // 为了简化示例，我们只是调整了初始密度
+        });
+    </script>
 </body>
 </html>
